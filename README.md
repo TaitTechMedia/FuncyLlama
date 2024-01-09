@@ -23,5 +23,5 @@ pip install langchain requests
 ### Run
 ```
 source venv/bin/activate
-python3 -m funcychat_term.py
+python3 -m app.py
 ```
