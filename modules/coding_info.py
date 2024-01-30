@@ -4,10 +4,10 @@ from langchain_community.llms import Ollama
 
 def gather_information_code(query):
     """
-    Fetches coding information from a specialized Large Language Model
+    This tool can answer quesitons about software and coding. It can generate and understand code.
 
     Args:
-    query (str): The user input to the LLM.
+    query (str): The user query.
 
     Returns:
     string: The answer to the user's query.
@@ -18,4 +18,4 @@ def gather_information_code(query):
         base_url="http://192.168.1.234:11434"
     )
     print("Handing to Codellama\n")
-    llm(query)
+    llm.invoke(query)
