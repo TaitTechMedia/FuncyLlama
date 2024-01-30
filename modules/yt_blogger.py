@@ -6,6 +6,9 @@ from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 from langchain_community.llms import Ollama
 import os
 
+from dotenv import load_dotenv
+load_dotenv()
+
 def fetch_youtube_transcript(url):
     """
     This tool can be used to retrieve a transcript from a YouTube video url. It will then write a creative blog post summarizing
@@ -32,7 +35,7 @@ def fetch_youtube_transcript(url):
         llm = Ollama(
         model="mistral_long",
         callback_manager=CallbackManager([StreamingStdOutCallbackHandler()]),
-        base_url="http://192.168.1.234:11434"
+        base_url=os.getenv('OLLAMA_BASE_URL')
     )
         post = llm.invoke(
             f'''

@@ -1,6 +1,9 @@
 from langchain.callbacks.manager import CallbackManager
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 from langchain_community.llms import Ollama
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 def gather_information_general(query):
     """
@@ -15,7 +18,7 @@ def gather_information_general(query):
     llm = Ollama(
         model="mistral",
         callback_manager=CallbackManager([StreamingStdOutCallbackHandler()]),
-        base_url="http://192.168.1.234:11434"
+        base_url=os.getenv('OLLAMA_BASE_URL')
     )
     print("\nHanding to Mistral\n")
     llm.invoke(query)

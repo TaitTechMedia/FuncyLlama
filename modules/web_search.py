@@ -4,6 +4,9 @@ from langchain_community.llms import Ollama
 import os
 from crewai import Agent, Task, Crew, Process
 from langchain.tools import DuckDuckGoSearchRun
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 search_tool = DuckDuckGoSearchRun()
 
@@ -19,7 +22,7 @@ def web_search(query):
     Returns:
     string: The answer to the user's query.
     """
-    openhermes = Ollama(model="openhermes", base_url='http://192.168.1.234:11434')
+    openhermes = Ollama(model="openhermes", base_url=os.getenv('OLLAMA_BASE_URL'))
 
     # Define your agents with roles and goals
     researcher = Agent(

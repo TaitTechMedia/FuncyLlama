@@ -15,7 +15,7 @@ def get_states(token):
         array: An array of JSON objects
     """
     token = os.getenv('HA_TOKEN')
-    url = "http://192.168.1.168:8123/api/states"
+    url = os.getenv('HA_BASE_URL')+"/api/states"
     headers = {
         "Authorization": f"Bearer {token}",
         "Content-Type": "application/json",
