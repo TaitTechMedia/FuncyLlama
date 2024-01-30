@@ -19,21 +19,22 @@ for module_name in function_files:
     module = importlib.import_module(module_path)
     globals().update({name: getattr(module, name) for name in dir(module) if callable(getattr(module, name))})
 
-# LLM Configuration
-llm = Ollama(
-    model="nexusraven",
-    callback_manager=CallbackManager([StreamingStdOutCallbackHandler()]),
-    base_url="http://192.168.1.234:11434" # This can be used to access a remote instance of Ollama on your LAN or over the internet
-)
-
 def query_raven(prompt):
     # Use the Ollama instance to process the prompt
-    output = llm(prompt)
+    output = llm.invoke(prompt)
     call = output.replace("Call:", "").strip()
     return call
 
 # Chatbot Loop
 while True:
+    # LLM Configuration
+    llm = Ollama(
+        model="nexusraven",
+        callback_manager=CallbackManager([StreamingStdOutCallbackHandler()]),
+        base_url="http://192.168.1.234:11434", # This can be used to access a remote instance of Ollama on your LAN or over the internet
+        stop=["Thought:"],
+    )
+
     # Step 2: User Input
     user_input = input("Ask me anything: ")
     
